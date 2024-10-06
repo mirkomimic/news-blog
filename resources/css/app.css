@@ -1,0 +1,8 @@
+.ProseMirror {
+  min-height: 500px !important;
+}
+
+.ProseMirror:focus {
+  outline: 1px solid gray;
+}
+
