@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-  Route::resource('articles', ArticlesController::class)->only(['index', 'store', 'update', 'destroy']);
+  Route::resource('articles', ArticlesController::class)->only(['index', 'create', 'store', 'update', 'destroy']);
 })->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

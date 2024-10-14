@@ -1,23 +1,28 @@
 <template>
   <div class="d-flex align-center ga-3">
     <v-file-input
+      ref="fileInput"
       @change="setThumbnail"
       label="Add Thumbnail"
-      multiple
       :error-messages="props.errorMsg"
       variant="outlined"
       accept="image/png, image/jpeg, image/jpg"
       prepend-icon="mdi-camera"
+      class="d-none"
     ></v-file-input>
-    <v-sheet>
+    <v-sheet 
+      @click="fileInput?.click"
+      class="cursor-pointer mx-auto"
+    >
       <v-img
         v-if="thumbnailPreview"
         :src="thumbnailPreview"
         width="200"
         height="100"
       ></v-img>
-      <v-sheet v-else border="sm" rounded class="d-flex justify-center items-center pa-2" width="200" height="100">
+      <v-sheet v-else border="sm" rounded class="d-flex flex-column justify-center align-center pa-2" width="200" height="100">
         <v-icon icon="mdi-image-frame" size="50" class="mt-3" color="accent"></v-icon>
+        <div>Add Thumbnail</div>
       </v-sheet>
     </v-sheet>
   </div>
@@ -28,6 +33,7 @@ import { ref } from 'vue';
 
 const thumbnail = defineModel()
 const thumbnailPreview = ref(null)
+const fileInput = ref()
 
 const props = defineProps({
   serverErrorMsg: {required: false, type: String}

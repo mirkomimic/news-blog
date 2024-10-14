@@ -55,6 +55,7 @@
 
                 <ArticleContentEditor 
                   v-model="form.content"
+                  v-model:images="form.images"
                 />
 
               </v-col>
@@ -102,6 +103,7 @@ const form = useForm({
   thumbnail: null,
   category_id: null,
   content: null,
+  images: []
 })
 
 const save = () => {

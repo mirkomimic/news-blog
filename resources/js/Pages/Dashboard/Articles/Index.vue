@@ -6,9 +6,9 @@
     <Breadcrumbs :breadcrumbs="breadcrumbs"/>
 
     <div class="px-5">
-      <CreateArticleDialog 
+      <!-- <CreateArticleDialog 
         :categories="props.categories"
-      />
+      /> -->
     </div>
   </DashboardLayout>
 </template>
@@ -29,12 +29,12 @@ const breadcrumbs = ref([
   {
     title: 'Articles',
     disabled: true,
-    route: 'dashboard.articles.index'
+    route: 'dashboard.articles.create'
   },
 ])
 
-const props = defineProps({
-  categories: { required: false, type: Object }
-})
+// const props = defineProps({
+//   categories: { required: false, type: Object }
+// })
 
 </script>

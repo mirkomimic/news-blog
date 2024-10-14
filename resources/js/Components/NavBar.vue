@@ -8,8 +8,7 @@
 
         <div class="d-flex">
           <Link href="/" class="text-decoration-none text-accent">
-            <img width="" src=""> 
-            ICON
+            <v-img width="50" color="accent" src="/images/news-icon.png" rounded="lg"/>
           </Link>
         </div>
 

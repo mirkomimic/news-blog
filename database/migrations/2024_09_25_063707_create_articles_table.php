@@ -17,6 +17,7 @@ return new class extends Migration
       $table->id();
       $table->string('title');
       $table->string('thumbnail');
+      $table->string('thumbnail_blob');
       $table->foreignIdFor(Category::class);
       $table->foreignIdFor(User::class);
       $table->text('content');

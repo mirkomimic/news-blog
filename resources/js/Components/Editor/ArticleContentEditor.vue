@@ -2,7 +2,7 @@
   <div v-if="editor" class="container">
     <div class="control-group mb-3">
       <div class="button-group d-flex ga-1">
-        <EditorButtons :editor="editor"/>
+        <EditorButtons :editor="editor" :images="props.images"/>
       </div>
     </div>
     <editor-content :editor="editor"/>
@@ -17,7 +17,7 @@ import { defineEmits, defineProps } from 'vue'
 import TextAlign from '@tiptap/extension-text-align'
 import EditorButtons from './EditorButtons.vue'
 import Image from '@tiptap/extension-image'
-import Paragraph from '@tiptap/extension-paragraph'
+import { useTipTapHelpers } from '@/Composables/tiptapHelpers'
 
 const props = defineProps({
   modelValue: {
@@ -26,14 +26,26 @@ const props = defineProps({
   },
 })
 
+const { addRemoveImgsFromForm } = useTipTapHelpers()
 const emit = defineEmits(['update:modelValue'])
 
+const images = defineModel('images')
 const editor = ref(null)
+const previousImages = ref([]);
+
+// Helper to extract image sources from HTML content
+// const getImagesFromContent = (content) => {
+//   const div = document.createElement('div');
+//   div.innerHTML = content;
+//   return [...div.querySelectorAll('img')].map((img) => img.src);
+// };
 
 onMounted(() => {
   editor.value = new Editor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        history: false,
+      }),
       Image.configure({
         HTMLAttributes: {
           class: 'd-block mx-auto w-100',
@@ -45,25 +57,21 @@ onMounted(() => {
       }),
     ],
     content: props.modelValue,
-    onUpdate: () => {
-      emit('update:modelValue', editor.value.getHTML())
-    },
     editorProps: {
       attributes: {
         class: 'border rounded tiptapHeight pa-3',
       },
+    },
+    onUpdate: ({ editor }) => {
+      
+      addRemoveImgsFromForm(images, previousImages, editor);
+
+      emit('update:modelValue', editor.getHTML())
     },
   })
 })
 
 onBeforeUnmount(() => {
   editor.value?.destroy()
-})
-
-watch(() => props.modelValue, (newValue) => {
-  const isSame = editor.value.getHTML() === newValue
-  if (!isSame) {
-    editor.value.commands.setContent(newValue, false)
-  }
 })
 </script>

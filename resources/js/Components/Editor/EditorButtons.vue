@@ -105,7 +105,13 @@
         icon="mdi-image-area-close"
         rounded="sm"
       ></v-btn>
-      <input ref="inputFile" type="file" id="inputFile" class="d-none" @change="insertImage">
+      <input
+        ref="inputFile"
+        type="file"
+        id="inputFile"
+        class="d-none"
+        @change="insertImage"
+      >
     </div>
 
   </div>
@@ -114,20 +120,23 @@
 <script setup>
 import { ref } from 'vue';
 
-const props = defineProps(['editor'])
+const props = defineProps(['editor', 'images'])
 const inputFile = ref()
 
 const insertImage = () => {
   const file = inputFile.value.files[0];
+
   if (file) {
     const url = URL.createObjectURL(file);
 
     props.editor.chain().focus().setImage({
       src: url,
-      // class: 'd-block mx-auto'
     }).run();
-    
-    // props.form.images.push(file); 
+
+    props.images.push({
+      file: file,
+      url: url
+    }); 
   }
 };
 </script>
