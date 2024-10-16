@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\ImagesService;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -10,12 +10,12 @@ class ArticlesImagesService
   {
     if (!empty($files)) {
       foreach ($files as $file) {
-        Storage::put("public/{$path}/{$article_id}", $file);
+        Storage::put("public/images/{$path}/{$article_id}", $file['file']);
       }
     }
 
     if (!is_null($thumbnail)) {
-      Storage::put("public/{$path}/{$article_id}", $thumbnail);
+      Storage::put("public/images/{$path}/{$article_id}", $thumbnail);
     }
   }
 }

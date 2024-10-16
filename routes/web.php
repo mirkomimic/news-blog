@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticlesController as ControllersArticlesController;
 use App\Http\Controllers\Dashboard\ArticlesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -18,9 +19,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-  return Inertia::render('Home');
-});
+Route::get('/', [ControllersArticlesController::class, 'index'])->name('home');
+
+Route::resource('articles', ControllersArticlesController::class)->only(['show']);
 
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('home');

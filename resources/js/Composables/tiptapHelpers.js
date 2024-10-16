@@ -17,5 +17,18 @@ export function useTipTapHelpers() {
     previousImages.value = currentImages;
   }
 
-  return { addRemoveImgsFromForm };
+  const replaceTempUrls = (path, article) => {
+    const div = document.createElement('div');
+    div.innerHTML = article.content;
+    div.querySelectorAll('img').forEach((img) => {
+      article.images.forEach((aImg) => {
+        if (img.src == aImg.image_blob) {
+          img.src = `/${path}/${article.id}/${aImg.image}`
+        }
+      })
+    })  
+    return div.outerHTML;
+  }
+
+  return { addRemoveImgsFromForm, replaceTempUrls };
 }

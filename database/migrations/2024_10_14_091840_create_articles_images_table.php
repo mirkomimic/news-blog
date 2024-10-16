@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Category;
-use App\Models\User;
+use App\Models\Article;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +12,11 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('articles', function (Blueprint $table) {
+    Schema::create('article_images', function (Blueprint $table) {
       $table->id();
-      $table->string('title');
-      $table->string('thumbnail')->nullable();
-      $table->foreignIdFor(Category::class);
-      $table->foreignIdFor(User::class);
-      $table->text('content');
+      $table->text('image');
+      $table->text('image_blob');
+      $table->foreignIdFor(Article::class)->cascadeOnDelete();
       $table->timestamps();
     });
   }
@@ -29,6 +26,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('articles');
+    Schema::dropIfExists('article_images');
   }
 };

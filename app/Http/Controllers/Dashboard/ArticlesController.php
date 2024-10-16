@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Services\ArticlesImagesService;
+use App\Services\CRUD\ArticlesCrudService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ArticlesController extends Controller
 {
   public function __construct(
-    protected ArticlesImagesService $articlesImagesService
+    protected ArticlesCrudService $articlesCrudService
   ) {}
 
   public function index()
@@ -34,6 +34,7 @@ class ArticlesController extends Controller
 
   public function store(Request $request)
   {
+    $this->articlesCrudService->create($request);
     // dd($request->toArray());
     return redirect()->route('dashboard.articles.index');
   }
