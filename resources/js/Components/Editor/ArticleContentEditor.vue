@@ -18,6 +18,9 @@ import TextAlign from '@tiptap/extension-text-align'
 import EditorButtons from './EditorButtons.vue'
 import Image from '@tiptap/extension-image'
 import { useTipTapHelpers } from '@/Composables/tiptapHelpers'
+import vueComponent from './Extensions/testExtension'
+import sourceNode from './Nodes/sourceNode'
+import { GrayText } from './Marks/grayTextMark'
 
 const props = defineProps({
   modelValue: {
@@ -33,19 +36,13 @@ const images = defineModel('images')
 const editor = ref(null)
 const previousImages = ref([]);
 
-// Helper to extract image sources from HTML content
-// const getImagesFromContent = (content) => {
-//   const div = document.createElement('div');
-//   div.innerHTML = content;
-//   return [...div.querySelectorAll('img')].map((img) => img.src);
-// };
-
 onMounted(() => {
   editor.value = new Editor({
     extensions: [
       StarterKit.configure({
         history: false,
       }),
+      GrayText,
       Image.configure({
         HTMLAttributes: {
           class: 'd-block mx-auto w-100',
@@ -55,6 +52,8 @@ onMounted(() => {
         types: ['heading', 'paragraph'],
         defaultAlignment: 'justify',
       }),
+      vueComponent,
+      sourceNode,
     ],
     content: props.modelValue,
     editorProps: {

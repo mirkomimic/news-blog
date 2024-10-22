@@ -3,7 +3,11 @@
 
   <MainLayout>
     {{ article.title }}
-    <div v-if="htmlContent" v-html="htmlContent" class="w-50 mx-auto"></div>
+    <div 
+      v-if="htmlContent" 
+      v-html="htmlContent" 
+      class="w-50 mx-auto"
+    />
 
   </MainLayout>
 </template>

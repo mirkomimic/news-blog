@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-center">
+  <div class="d-flex align-center ga-3">
     <!-- Nodes -->
     <div class="d-flex ga-1">
       <v-btn
@@ -48,7 +48,7 @@
       </v-btn>
     </div>
     <!-- Alignment -->
-    <div class="mx-2">
+    <div class="">
       <v-btn
         density="comfortable"
         variant="tonal"
@@ -112,6 +112,19 @@
         class="d-none"
         @change="insertImage"
       >
+    </div>
+
+    <div>
+      <v-btn
+        density="comfortable"
+        variant="tonal"
+        type="button"
+        color="accent"
+        icon
+        rounded="sm"
+        @click="editor.chain().focus().insertSourceNode().run()"
+        >S
+      </v-btn>
     </div>
 
   </div>
