@@ -20,6 +20,7 @@ import Image from '@tiptap/extension-image'
 import { useTipTapHelpers } from '@/Composables/tiptapHelpers'
 import vueComponent from './Extensions/testExtension'
 import sourceNode from './Nodes/sourceNode'
+import galleryNode from './Nodes/galleryNode'
 import { GrayText } from './Marks/grayTextMark'
 
 const props = defineProps({
@@ -34,7 +35,6 @@ const emit = defineEmits(['update:modelValue'])
 
 const images = defineModel('images')
 const editor = ref(null)
-const previousImages = ref([]);
 
 onMounted(() => {
   editor.value = new Editor({
@@ -54,6 +54,7 @@ onMounted(() => {
       }),
       vueComponent,
       sourceNode,
+      galleryNode
     ],
     content: props.modelValue,
     editorProps: {
@@ -62,8 +63,7 @@ onMounted(() => {
       },
     },
     onUpdate: ({ editor }) => {
-      
-      addRemoveImgsFromForm(images, previousImages, editor);
+      addRemoveImgsFromForm(images, editor);
 
       emit('update:modelValue', editor.getHTML())
     },

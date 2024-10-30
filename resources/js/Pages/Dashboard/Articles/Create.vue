@@ -5,10 +5,6 @@
 
     <Breadcrumbs :breadcrumbs="breadcrumbs"/>
 
-    <div class="px-5">
-
-    </div>
-
     <section class="px-5">
       <StepperCreateArticle 
         :categories="categories"

@@ -31,7 +31,7 @@
             </v-btn>
           </Link>
 
-          <Link v-if="$page.props.auth.user.is_admin" :href="route('dashboard.home')">
+          <Link v-if="$page.props.auth.user?.is_admin" :href="route('dashboard.home')">
             <v-btn
               variant="outlined"
               color="accent"

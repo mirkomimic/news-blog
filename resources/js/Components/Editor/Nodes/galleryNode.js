@@ -1,9 +1,9 @@
 import { Node, mergeAttributes } from '@tiptap/core'
 import { VueNodeViewRenderer } from '@tiptap/vue-3' 
-import sourceComponent from '../Components/sourceComponent.vue'
+import galleryComponent from '../Components/galleryComponent.vue'
 
 export default Node.create({
-  name: 'sourceNode',
+  name: 'galleryNode',
 
   group: 'block',
 
@@ -11,8 +11,8 @@ export default Node.create({
 
   addAttributes() {
     return {
-      text: {
-        default: '', // Default text if no other text is provided
+      src: {
+        default: [],
       },
     }
   },
@@ -20,32 +20,29 @@ export default Node.create({
   parseHTML() {
     return [
       {
-        tag: 'source-component',
+        tag: 'gallery-component',
       },
     ]
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['source-component', mergeAttributes(HTMLAttributes), 0]
+    return ['gallery-component', mergeAttributes(HTMLAttributes), 0]
   },
 
   addNodeView() {
-    return VueNodeViewRenderer(sourceComponent)
+    return VueNodeViewRenderer(galleryComponent)
   },
 
   addCommands() {
     return {
-      insertSourceNode:
-        () =>
+      insertGalleryNode:
+        (options) =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
-            content: [
-              {
-                type: 'text',
-                text: 'Source: ',
-              },
-            ],
+            attrs: {
+              src: options.tempImages || [],
+            },
           })
         },
     }

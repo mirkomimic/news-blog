@@ -27,11 +27,13 @@ class ArticlesCrudService
 
       $article->thumbnail = $request->thumbnail->hashName();
 
-      foreach ($request->images as $image) {
-        $article->images()->create([
-          'image' => $image['file']->hashName(),
-          'image_blob' => $image['url']
-        ]);
+      if ($request->hasFile('images.*.file')) {
+        foreach ($request->images as $image) {
+          $article->images()->create([
+            'image' => $image['file']->hashName(),
+            'image_blob' => $image['url']
+          ]);
+        }
       }
     }
 

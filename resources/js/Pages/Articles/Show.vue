@@ -2,29 +2,31 @@
   <Head title="Article" />
 
   <MainLayout>
-    {{ article.title }}
-    <div 
-      v-if="htmlContent" 
-      v-html="htmlContent" 
-      class="w-50 mx-auto"
+
+    <ShowArticleEditor 
+      v-if="editorContent"
+      v-model="editorContent"
+      style="width: 700px;"
+      class="mx-auto"
     />
 
   </MainLayout>
 </template>
 
 <script setup>
+import { Head } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
 import { useTipTapHelpers } from '@/Composables/tiptapHelpers';
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import ShowArticleEditor from '@/Components/Editor/ShowArticleEditor.vue';
 
 const props = defineProps(['article'])
 
-const { replaceTempUrls } = useTipTapHelpers()
+const { replaceTempUrlsFromGallery } = useTipTapHelpers()
 
-const htmlContent = ref()
+const editorContent = ref()
 
 onMounted(() => {
-  htmlContent.value = replaceTempUrls('storage/images/articles', props.article)
+  editorContent.value = replaceTempUrlsFromGallery('articles', props.article)
 })
 </script>

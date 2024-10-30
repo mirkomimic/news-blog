@@ -5,9 +5,9 @@
   >
     <v-list>
       <v-list-item
-        :prepend-avatar="$page.props.auth.user.image || '/images/user-placeholder.png'"
-        :title="$page.props.auth.user.name"
-        :subtitle="$page.props.auth.user.email"
+        :prepend-avatar="$page.props.auth.user?.image || '/images/user-placeholder.png'"
+        :title="$page.props.auth.user?.name"
+        :subtitle="$page.props.auth.user?.email"
       ></v-list-item>
     </v-list>
 
