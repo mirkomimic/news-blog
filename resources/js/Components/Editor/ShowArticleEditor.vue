@@ -14,6 +14,7 @@ import { GrayText } from '@/Components/Editor/Marks/grayTextMark'
 import TextAlign from '@tiptap/extension-text-align'
 import Image from '@tiptap/extension-image'
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import tweetNode from '@/Components/Editor/Nodes/tweetNode'
 
 const props = defineProps({
   modelValue: {
@@ -43,7 +44,8 @@ onMounted(() => {
       GrayText,
       vueComponent,
       sourceNode,
-      galleryNode
+      galleryNode,
+      tweetNode
     ],
     content: props.modelValue,
     editorProps: {

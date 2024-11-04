@@ -129,6 +129,10 @@
         @change="insertGalleryImages"
       >
 
+      <EmbedYouTubeBtn :editor="props.editor"/>
+
+      <EmbedTweetBtn :editor="props.editor"/>
+
       <v-tooltip text="Source" location="top">
         <template v-slot:activator="{ props }">
           <v-btn
@@ -144,12 +148,13 @@
       </v-tooltip>
     </v-btn-group>
 
-
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import EmbedYouTubeBtn from '../Buttons/EmbedYouTubeBtn.vue';
+import EmbedTweetBtn from '../Buttons/EmbedTweetBtn.vue';
 
 const props = defineProps(['editor', 'images'])
 const inputFile = ref()

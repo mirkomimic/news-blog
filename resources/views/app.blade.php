@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{-- <meta name="twitter:widgets:autoload" content="off"> --}}
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,5 +18,7 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+
+        <script src="https://platform.twitter.com/widgets.js"></script>
     </body>
 </html>

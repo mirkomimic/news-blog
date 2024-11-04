@@ -22,6 +22,8 @@ import vueComponent from './Extensions/testExtension'
 import sourceNode from './Nodes/sourceNode'
 import galleryNode from './Nodes/galleryNode'
 import { GrayText } from './Marks/grayTextMark'
+import Youtube from '@tiptap/extension-youtube'
+import tweetNode from './Nodes/tweetNode'
 
 const props = defineProps({
   modelValue: {
@@ -52,9 +54,13 @@ onMounted(() => {
         types: ['heading', 'paragraph'],
         defaultAlignment: 'justify',
       }),
+      Youtube.configure({
+        nocookie: true,
+      }),
       vueComponent,
       sourceNode,
-      galleryNode
+      galleryNode,
+      tweetNode
     ],
     content: props.modelValue,
     editorProps: {
