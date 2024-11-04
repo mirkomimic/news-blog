@@ -16,7 +16,7 @@ const embedTweet = () => {
   if (window.twttr && window.twttr.widgets) { 
     window.twttr.ready(() => { 
       window.twttr.widgets.createTweet(
-        tweetID,
+        props.node.attrs.tweetID,
         tweetEmbed.value,
         {
           theme: 'dark',
