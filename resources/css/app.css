@@ -1,3 +1,5 @@
+@import 'highlight.js/styles/purebasic.css';
+
 .ProseMirror {
   min-height: 500px !important;
 }

@@ -94,7 +94,7 @@
             density="comfortable"
             type="button"
             color="accent"
-            icon="mdi-image-area-close"
+            icon="mdi-image-area"
           ></v-btn>
         </template>
       </v-tooltip>
@@ -115,7 +115,6 @@
             type="button"
             color="accent"
             icon="mdi-view-gallery-outline"
-            @click=""
             >
           </v-btn>
         </template>
@@ -128,10 +127,6 @@
         multiple
         @change="insertGalleryImages"
       >
-
-      <EmbedYouTubeBtn :editor="props.editor"/>
-
-      <EmbedTweetBtn :editor="props.editor"/>
 
       <v-tooltip text="Source" location="top">
         <template v-slot:activator="{ props }">
@@ -148,6 +143,27 @@
       </v-tooltip>
     </v-btn-group>
 
+    <v-btn-group
+      variant="tonal"
+      density="comfortable"
+      divided
+    >
+      <BulletListBtn :editor="props.editor"/>
+      <CodeBlockBtn :editor="props.editor"/>
+      <HorizontalRuleBtn :editor="props.editor"/>
+    </v-btn-group>
+
+    <v-btn-group
+      variant="tonal"
+      density="comfortable"
+      divided
+    >
+      <EmbedYouTubeBtn :editor="props.editor"/>
+      <EmbedTweetBtn :editor="props.editor"/>
+      <EmbedInstagramBtn :editor="props.editor"/>
+    </v-btn-group>
+
+
   </div>
 </template>
 
@@ -155,6 +171,10 @@
 import { ref } from 'vue';
 import EmbedYouTubeBtn from '../Buttons/EmbedYouTubeBtn.vue';
 import EmbedTweetBtn from '../Buttons/EmbedTweetBtn.vue';
+import BulletListBtn from '../Buttons/BulletListBtn.vue';
+import CodeBlockBtn from '../Buttons/CodeBlockBtn.vue';
+import HorizontalRuleBtn from '../Buttons/HorizontalRuleBtn.vue';
+import EmbedInstagramBtn from '../Buttons/EmbedInstagramBtn.vue';
 
 const props = defineProps(['editor', 'images'])
 const inputFile = ref()

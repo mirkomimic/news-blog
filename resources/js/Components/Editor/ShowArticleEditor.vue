@@ -15,6 +15,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Image from '@tiptap/extension-image'
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import tweetNode from '@/Components/Editor/Nodes/tweetNode'
+import instagramNode from '@/Components/Editor/Nodes/instagramNode'
 
 const props = defineProps({
   modelValue: {
@@ -45,7 +46,8 @@ onMounted(() => {
       vueComponent,
       sourceNode,
       galleryNode,
-      tweetNode
+      tweetNode,
+      instagramNode
     ],
     content: props.modelValue,
     editorProps: {

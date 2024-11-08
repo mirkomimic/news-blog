@@ -20,7 +20,7 @@ const embedTweet = () => {
         tweetEmbed.value,
         {
           theme: 'dark',
-          align: 'center'
+          align: 'center',
         }
       ).catch(error => console.error('Error embedding tweet:', error));
      })

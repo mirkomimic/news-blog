@@ -20,5 +20,6 @@
         @inertia
 
         <script src="https://platform.twitter.com/widgets.js"></script>
+        <script async defer src="//www.instagram.com/embed.js"></script>
     </body>
 </html>
