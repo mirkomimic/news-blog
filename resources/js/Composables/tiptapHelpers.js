@@ -3,6 +3,9 @@ import { ref } from "vue";
 export function useTipTapHelpers() {
 
   const previousImages = ref([]);
+  const removedImages = ref([])
+  const currentImages = ref([])
+  const currentImagesFromGallery = ref([])
 
   const getImagesFromGallery = (content) => {
     let array = [];
@@ -24,17 +27,21 @@ export function useTipTapHelpers() {
     return [...div.querySelectorAll('img')].map((img) => img.src);
   };
 
-  const addRemoveImgsFromForm = (images, editor) => {
-    let currentImages = getImagesFromContent(editor.getHTML());
-    const currentImagesFromGallery = getImagesFromGallery(editor.getHTML())
+  const addRemoveImgsFromForm = (form, editor) => {
+    currentImages.value = getImagesFromContent(editor.getHTML());
+    currentImagesFromGallery.value = getImagesFromGallery(editor.getHTML())
 
-    currentImages = currentImages.concat(currentImagesFromGallery);
+    currentImages.value = currentImages.value.concat(currentImagesFromGallery.value);
 
-    const removedImages = previousImages.value.filter(url => !currentImages.includes(url));
+    removedImages.value = previousImages.value.filter(url => !currentImages.value.includes(url));
 
-    images.value = images.value.filter(image => !removedImages.includes(image.url));
+    const filteredImages = form.images.filter(image => !removedImages.value.includes(image.url));
+    form.images.length = 0; 
+    form.images.push(...filteredImages);
+    // The splice method modifies the contents of the array directly without changing the array’s reference.
+    // form.images.splice(0, form.images.length, ...form.images.filter(image => !removedImages.value.includes(image.url)));
 
-    previousImages.value = currentImages;
+    previousImages.value = currentImages.value;
   }
 
   const replaceTempUrls = (path, article) => {
@@ -43,7 +50,7 @@ export function useTipTapHelpers() {
     div.querySelectorAll('img').forEach((img) => {
       article.images.forEach((aImg) => {
         if (img.src == aImg.image_blob) {
-          img.src = `/${path}/${article.id}/${aImg.image}`
+          img.src = `/storage/images/${path}/${article.id}/${aImg.image}`
         }
       })
     })  

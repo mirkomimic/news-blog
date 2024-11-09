@@ -16,6 +16,14 @@ import Image from '@tiptap/extension-image'
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import tweetNode from '@/Components/Editor/Nodes/tweetNode'
 import instagramNode from '@/Components/Editor/Nodes/instagramNode'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { all, createLowlight } from 'lowlight'
+import js from 'highlight.js/lib/languages/javascript'
+import html from 'highlight.js/lib/languages/xml';
+
+const lowlight = createLowlight(all)
+lowlight.register('js', js)
+lowlight.register('html', html)
 
 const props = defineProps({
   modelValue: {
@@ -31,7 +39,20 @@ onMounted(() => {
     editable: false,
     extensions: [
       StarterKit.configure({
+        codeBlock: false,
         history: false,
+        bulletList: {
+          HTMLAttributes: {
+            class: 'ms-3'
+          }
+        },
+      }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        defaultLanguage: 'js',
+        HTMLAttributes: {
+          class: 'bg-white rounded pa-2',
+        },
       }),
       Image.configure({
         HTMLAttributes: {

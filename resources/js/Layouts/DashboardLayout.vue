@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-app>
     <v-app-bar 
       scroll-behavior="hide"
       scroll-threshold="50"
@@ -22,7 +22,11 @@
 
     </v-bottom-navigation>
 
-  </v-layout>
+    <v-footer style="z-index: 20;" v-if="display.mdAndUp">
+      <!-- <MainFooter/> -->
+    </v-footer>
+
+  </v-app>
 </template>
 
 <script setup>

@@ -77,9 +77,10 @@
         </v-stepper-window-item>
 
         <v-stepper-window-item value="2">
+          {{ form.images }}
+          {{ form.content }}
           <ArticleContentEditor 
             v-model="form.content"
-            v-model:images="form.images"
             style="width: 700px;"
             class="mx-auto"
           />
@@ -111,7 +112,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import ThumbnailInput from '../Inputs/ThumbnailInput.vue';
 import ArticleContentEditor from '../Editor/ArticleContentEditor.vue';
@@ -127,6 +128,8 @@ const form = useForm({
   content: null,
   images: []
 })
+
+provide('form', form)
 
 const save = () => {
   form.post(route('dashboard.articles.store'), {

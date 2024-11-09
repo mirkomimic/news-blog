@@ -22,17 +22,12 @@ import ShowArticleEditor from '@/Components/Editor/ShowArticleEditor.vue';
 
 const props = defineProps(['article'])
 
-const { replaceTempUrlsFromGallery } = useTipTapHelpers()
-// const { createTweets } = useTipTapHelpers()
+const { replaceTempUrlsFromGallery, replaceTempUrls } = useTipTapHelpers()
 
 const editorContent = ref()
 
 onMounted(() => {
   editorContent.value = replaceTempUrlsFromGallery('articles', props.article)
-  // editorContent.value = await createTweets(editorContent.value)
-  // console.log(editorContent.value);
-  // console.log(editorContent.value);
-  // const tweet = document.getElementsByTagName('tweet-component')
-  // console.log(tweet);
+  editorContent.value = replaceTempUrls('articles', props.article)
 })
 </script>
