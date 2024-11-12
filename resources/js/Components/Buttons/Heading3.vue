@@ -1,13 +1,13 @@
 <template>
-  <v-tooltip text="Bullet List" location="top">
+  <v-tooltip text="Heading 3" location="top">
     <template v-slot:activator="{ props }">
       <v-btn
         v-bind="props"
         type="button"
         color="accent"
-        icon="mdi-format-list-bulleted"
-        :class="{ 'bg-indigo-darken-3': editor.isActive('bulletList') }"
-        @click="editor.chain().focus().toggleBulletList().run()"
+        icon="mdi-format-header-3"
+        @click="editor.chain().toggleHeading({ level: 3 }).run()"
+        :class="{ 'bg-indigo-darken-3': editor.isActive('heading', { level: 3 }) }"
       />
     </template>
   </v-tooltip>

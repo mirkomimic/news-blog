@@ -77,8 +77,6 @@
         </v-stepper-window-item>
 
         <v-stepper-window-item value="2">
-          {{ form.images }}
-          {{ form.content }}
           <ArticleContentEditor 
             v-model="form.content"
             style="width: 700px;"

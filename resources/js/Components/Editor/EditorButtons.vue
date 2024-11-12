@@ -1,220 +1,74 @@
 <template>
-  <div class="d-flex align-center ga-3">
-    <!-- Nodes -->
-    <v-btn-group
-      variant="tonal"
-      divided
-      density="comfortable"
-    >
-      <v-btn
-        type="button"
-        color="accent"
-        icon=""
-        @click="editor.chain().toggleHeading({ level: 1 }).run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive('heading', { level: 1 }) }"
-        >H1
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon=""
-        @click="editor.chain().toggleHeading({ level: 1 }).run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive('heading', { level: 2 }) }"
-        >H2
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon=""
-        @click="editor.chain().toggleHeading({ level: 1 }).run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive('heading', { level: 3 }) }"
-        >H3
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon=""
-        @click="editor.commands.setParagraph()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive('paragraph') }"
-        >P
-      </v-btn>
+  <div class="d-flex flex-wrap align-center ga-3">
+    <v-btn-group variant="tonal" density="comfortable" divided>
+      <Heading1 :editor="props.editor"/>
+      <Heading2 :editor="props.editor"/>
+      <Heading3 :editor="props.editor"/>
+      <!-- <ParagraphBtn :editor="props.editor"/> -->
     </v-btn-group>
 
-    <!-- Alignment -->
-    <v-btn-group
-      variant="tonal"
-      divided
-      density="comfortable"
-    >
-      <v-btn
-        type="button"
-        color="accent"
-        icon="mdi-format-align-left"
-        @click="editor.chain().focus().setTextAlign('left').run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive({ textAlign: 'left'}) }"
-        >
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon="mdi-format-align-center"
-        @click="editor.chain().focus().setTextAlign('center').run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive({ textAlign: 'center'}) }"
-        >
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon="mdi-format-align-justify"
-        @click="editor.chain().focus().setTextAlign('justify').run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive({ textAlign: 'justify'}) }"
-        >
-      </v-btn>
-      <v-btn
-        type="button"
-        color="accent"
-        icon="mdi-format-align-right"
-        @click="editor.chain().focus().setTextAlign('right').run()"
-        :class="{ 'bg-indigo-darken-3': editor.isActive({ textAlign: 'right'}) }"
-        >
-      </v-btn>
+    <v-btn-group variant="tonal" density="comfortable" divided>
+      <BoldBtn :editor="props.editor"/>
+      <ItalicBtn :editor="props.editor"/>
+      <UnderlineBtn :editor="props.editor"/>
     </v-btn-group>
 
-    <!-- Media -->
-    <v-btn-group
-      variant="tonal"
-      density="comfortable"
-      divided
-    >
-      <v-tooltip text="Tooltip" location="top">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-bind="props"
-            onclick="document.getElementById('inputFile').click();"
-            density="comfortable"
-            type="button"
-            color="accent"
-            icon="mdi-image-area"
-          ></v-btn>
-        </template>
-      </v-tooltip>
-      <input
-        ref="inputFile"
-        type="file"
-        id="inputFile"
-        class="d-none"
-        @change="insertImage"
-      >
-
-      <v-tooltip text="Gallery" location="top">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-bind="props"
-            onclick="document.getElementById('galleryInput').click();"
-            density="comfortable"
-            type="button"
-            color="accent"
-            icon="mdi-view-gallery-outline"
-            >
-          </v-btn>
-        </template>
-      </v-tooltip>
-      <input
-        ref="galleryInput"
-        type="file"
-        id="galleryInput"
-        class="d-none"
-        multiple
-        @change="insertGalleryImages"
-      >
-
-      <v-tooltip text="Source" location="top">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-bind="props"
-            density="comfortable"
-            type="button"
-            color="accent"
-            icon
-            @click="editor.chain().focus().insertSourceNode().run()"
-            >S
-          </v-btn>
-        </template>
-      </v-tooltip>
+    <v-btn-group variant="tonal" density="comfortable" divided>
+      <TextAlignLeftBtn :editor="props.editor"/>
+      <TextAlignCenterBtn :editor="props.editor"/>
+      <TextAlignJustifyBtn :editor="props.editor"/>
+      <TextAlignRightBtn :editor="props.editor"/>
     </v-btn-group>
 
-    <v-btn-group
-      variant="tonal"
-      density="comfortable"
-      divided
-    >
+    <v-btn-group variant="tonal" density="comfortable" divided>
       <BulletListBtn :editor="props.editor"/>
       <CodeBlockBtn :editor="props.editor"/>
       <HorizontalRuleBtn :editor="props.editor"/>
     </v-btn-group>
 
-    <v-btn-group
-      variant="tonal"
-      density="comfortable"
-      divided
-    >
+    <v-btn-group variant="tonal" density="comfortable" divided>
+      <InsertEditorTableDialog :editor="props.editor"/>
+      <MergeOrSplitBtn :editor="props.editor"/>
+    </v-btn-group>
+
+    <v-btn-group variant="tonal" density="comfortable" divided>
+      <InsertImageBtn :editor="props.editor"/>
+      <InsertGalleryBtn :editor="props.editor"/>
+      <SourceBtn :editor="props.editor"/>
+    </v-btn-group>
+
+    <v-btn-group variant="tonal" density="comfortable" divided>
       <EmbedYouTubeBtn :editor="props.editor"/>
       <EmbedTweetBtn :editor="props.editor"/>
       <EmbedInstagramBtn :editor="props.editor"/>
     </v-btn-group>
 
-
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import EmbedYouTubeBtn from '../Buttons/EmbedYouTubeBtn.vue';
-import EmbedTweetBtn from '../Buttons/EmbedTweetBtn.vue';
-import BulletListBtn from '../Buttons/BulletListBtn.vue';
-import CodeBlockBtn from '../Buttons/CodeBlockBtn.vue';
-import HorizontalRuleBtn from '../Buttons/HorizontalRuleBtn.vue';
-import EmbedInstagramBtn from '../Buttons/EmbedInstagramBtn.vue';
+import EmbedYouTubeBtn from '@/Components/Buttons/EmbedYouTubeBtn.vue';
+import EmbedTweetBtn from '@/Components/Buttons/EmbedTweetBtn.vue';
+import BulletListBtn from '@/Components/Buttons/BulletListBtn.vue';
+import CodeBlockBtn from '@/Components/Buttons/CodeBlockBtn.vue';
+import HorizontalRuleBtn from '@/Components/Buttons/HorizontalRuleBtn.vue';
+import EmbedInstagramBtn from '@/Components/Buttons/EmbedInstagramBtn.vue';
+import Heading1 from '@/Components/Buttons/Heading1.vue';
+import Heading2 from '@/Components/Buttons/Heading2.vue';
+import Heading3 from '@/Components/Buttons/Heading3.vue';
+import ParagraphBtn from '@/Components/Buttons/ParagraphBtn.vue';
+import TextAlignLeftBtn from '@/Components/Buttons/TextAlignLeftBtn.vue';
+import TextAlignCenterBtn from '@/Components/Buttons/TextAlignCenterBtn.vue';
+import TextAlignJustifyBtn from '@/Components/Buttons/TextAlignJustifyBtn.vue';
+import TextAlignRightBtn from '@/Components/Buttons/TextAlignRightBtn.vue';
+import InsertImageBtn from '@/Components/Buttons/InsertImageBtn.vue';
+import InsertGalleryBtn from '@/Components/Buttons/InsertGalleryBtn.vue';
+import SourceBtn from '../Buttons/SourceBtn.vue';
+import BoldBtn from '../Buttons/BoldBtn.vue';
+import ItalicBtn from '../Buttons/ItalicBtn.vue';
+import UnderlineBtn from '../Buttons/UnderlineBtn.vue';
+import InsertEditorTableDialog from '../Dialogs/InsertEditorTableDialog.vue';
+import MergeOrSplitBtn from '../Buttons/MergeOrSplitBtn.vue';
 
 const props = defineProps(['editor', 'images'])
-const inputFile = ref()
-const galleryInput = ref()
-
-const insertImage = () => {
-  const file = inputFile.value.files[0];
-
-  if (file) {
-    const url = URL.createObjectURL(file);
-
-    props.editor.chain().focus().setImage({
-      src: url,
-    }).run();
-
-    props.images.push({
-      file: file,
-      url: url
-    }); 
-  }
-};
-
-const insertGalleryImages = () => {
-  const files = galleryInput.value.files;
-
-  const fileUrls = [];
-
-  for (const file of files) {
-    const tempUrl = URL.createObjectURL(file);
-
-    fileUrls.push(tempUrl); 
-
-    props.images.push({
-      file: file,
-      url: tempUrl
-    }); 
-  }
-
-  props.editor.chain().focus().insertGalleryNode({
-    tempImages: fileUrls,
-  }).run()
-}
 </script>

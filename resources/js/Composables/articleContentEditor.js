@@ -15,6 +15,10 @@ import { all, createLowlight } from 'lowlight'
 import js from 'highlight.js/lib/languages/javascript'
 import html from 'highlight.js/lib/languages/xml';
 import { onMounted, ref, onBeforeUnmount } from 'vue'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 
 const lowlight = createLowlight(all)
 lowlight.register('js', js)
@@ -46,6 +50,10 @@ export function useArticleContentEditor(emit, form) {
           },
         }),
         GrayText,
+        Table.configure({ resizable: true }),
+        TableCell,
+        TableHeader,
+        TableRow,
         Image.configure({
           HTMLAttributes: {
             class: 'd-block mx-auto w-100',

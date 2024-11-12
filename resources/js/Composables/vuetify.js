@@ -2,6 +2,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import colors from 'vuetify/util/colors'
+import { VNumberInput } from 'vuetify/labs/VNumberInput'
 
 export function useVuetify() {
   const vuetify = createVuetify({
@@ -20,7 +21,10 @@ export function useVuetify() {
         }
       }
     },
-    components,
+    components: {
+      ...components,
+      VNumberInput
+    },
     directives,
   })
 

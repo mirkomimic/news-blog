@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
+import '../css/tiptap.scss';
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
