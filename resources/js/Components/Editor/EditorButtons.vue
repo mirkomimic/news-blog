@@ -1,5 +1,9 @@
 <template>
-  <div class="d-flex flex-wrap align-center ga-3">
+  <div class="d-flex flex-wrap align-center ga-3 py-3">
+
+    <FontFamilySelect :editor="props.editor" style="width: 170px;"/>
+    <FontSizeSelect :editor="props.editor" style="width: 50px;"/>
+
     <v-btn-group variant="tonal" density="comfortable" divided>
       <Heading1 :editor="props.editor"/>
       <Heading2 :editor="props.editor"/>
@@ -32,8 +36,8 @@
     </v-btn-group>
 
     <v-btn-group variant="tonal" density="comfortable" divided>
-      <InsertImageBtn :editor="props.editor"/>
-      <InsertGalleryBtn :editor="props.editor"/>
+      <InsertImageBtn :editor="props.editor" :images="props.images"/>
+      <InsertGalleryBtn :editor="props.editor" :images="props.images"/>
       <SourceBtn :editor="props.editor"/>
     </v-btn-group>
 
@@ -69,6 +73,8 @@ import ItalicBtn from '../Buttons/ItalicBtn.vue';
 import UnderlineBtn from '../Buttons/UnderlineBtn.vue';
 import InsertEditorTableDialog from '../Dialogs/InsertEditorTableDialog.vue';
 import MergeOrSplitBtn from '../Buttons/MergeOrSplitBtn.vue';
+import FontFamilySelect from '../Selects/FontFamilySelect.vue';
+import FontSizeSelect from '../Selects/FontSizeSelect.vue';
 
 const props = defineProps(['editor', 'images'])
 </script>

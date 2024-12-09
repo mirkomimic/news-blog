@@ -6,17 +6,18 @@
     <Breadcrumbs :breadcrumbs="breadcrumbs"/>
 
     <div class="px-5">
-
+      <ArticlesDataTable :articles="props.articles"/>
       
     </div>
   </DashboardLayout>
 </template>
 
 <script setup>
+import ArticlesDataTable from '@/Components/DataTables/ArticlesDataTable.vue';
 import Breadcrumbs from '@/Components/Other/Breadcrumbs.vue';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 
 const breadcrumbs = ref([
   {
@@ -31,5 +32,7 @@ const breadcrumbs = ref([
   },
 ])
 
-const tweetEmbed = ref(null)
+const props = defineProps(['articles', 'categories'])
+
+provide('categories', props.categories)
 </script>

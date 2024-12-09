@@ -25,7 +25,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const props = defineProps(['editor'])
+const props = defineProps(['editor', 'images'])
 
 const galleryInput = ref()
 

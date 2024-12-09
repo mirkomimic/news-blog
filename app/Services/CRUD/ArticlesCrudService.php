@@ -45,4 +45,29 @@ class ArticlesCrudService
     $articles = Article::with(['images', 'category'])->get();
     return $articles;
   }
+
+  public function update(Article $article, Request $request): void
+  {
+    $article->title = $request->title;
+    $article->category_id = $request->category_id;
+    $article->content = $request->content;
+
+    if ($request->hasFile('images.*.file')) {
+      $this->articlesImagesService->saveImages('articles', $article->id, $request->images);
+    }
+
+    if ($request->hasFile('thumbnail')) {
+      $this->articlesImagesService->updateThumbnail('articles', $article->id, $request->thumbnail);
+
+      $article->thumbnail = $request->thumbnail->hashName();
+    }
+
+    $article->save();
+  }
+
+  public function delete(Article $article)
+  {
+    $this->articlesImagesService->delete('articles', $article->id);
+    $article->delete();
+  }
 }

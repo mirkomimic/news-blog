@@ -29,6 +29,7 @@ export function useTipTapHelpers() {
 
   const addRemoveImgsFromForm = (form, editor) => {
     currentImages.value = getImagesFromContent(editor.getHTML());
+    console.log(editor.getHTML());
     currentImagesFromGallery.value = getImagesFromGallery(editor.getHTML())
 
     currentImages.value = currentImages.value.concat(currentImagesFromGallery.value);
@@ -74,5 +75,31 @@ export function useTipTapHelpers() {
     return div.innerHTML;
   }
 
-  return { addRemoveImgsFromForm, replaceTempUrls, replaceTempUrlsFromGallery };
+  const replaceBlobsWithUrls = (path, article) => {
+    const div = document.createElement('div');
+    div.innerHTML = article.content;
+    div.querySelectorAll('img').forEach((img) => {
+      article.images.forEach((aImg) => {
+        if (img.src == aImg.image_blob) {
+          img.src = `/storage/images/${path}/${article.id}/${aImg.image}`
+        }
+      })
+    })  
+
+    let elements = div.querySelectorAll('gallery-component')
+
+    elements.forEach((component) => {
+      let blobs = component.getAttribute('src').split(',')
+      let imagesUrls = article.images.map((img) => {
+        if (blobs.includes(img.image_blob)) {
+          return `/storage/images/${path}/${article.id}/${img.image}`
+        }
+      })
+      component.setAttribute('src', imagesUrls);
+    })
+
+    return div.innerHTML;
+  }
+
+  return { addRemoveImgsFromForm, replaceTempUrls, replaceTempUrlsFromGallery, replaceBlobsWithUrls };
 }

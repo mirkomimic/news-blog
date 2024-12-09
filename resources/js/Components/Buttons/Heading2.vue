@@ -6,7 +6,7 @@
         type="button"
         color="accent"
         icon="mdi-format-header-2"
-        @click="editor.chain().toggleHeading({ level: 2 }).run()"
+        @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
         :class="{ 'bg-indigo-darken-3': editor.isActive('heading', { level: 2 }) }"
       />
     </template>

@@ -29,7 +29,7 @@ lowlight.register('js', js)
 lowlight.register('html', html)
 
 
-export function useArticleContentEditor(emit, form) {
+export function useEditArticleContentEditor(emit, form, content) {
 
   const editor = ref(null)
   const { addRemoveImgsFromForm } = useTipTapHelpers()
@@ -45,9 +45,6 @@ export function useArticleContentEditor(emit, form) {
               class: 'ms-3'
             }
           },
-          // heading: {
-          //   levels: [1, 2, 3]
-          // }
         }),
         CodeBlockLowlight.configure({
           lowlight,
@@ -83,13 +80,14 @@ export function useArticleContentEditor(emit, form) {
         FontSize,
         CustomParagraph,
       ],
-      // content: content.value,
+      content: content.value,
       editorProps: {
         attributes: {
           class: 'border rounded tiptapHeight pa-3',
         },
       },
       onUpdate: ({ editor }) => {
+        console.log(form);
         addRemoveImgsFromForm(form, editor);
         emit('update:modelValue', editor.getHTML())
       },
