@@ -27,6 +27,18 @@
           color="accent"
         ></v-select>
 
+        <div class="d-flex">
+          <v-checkbox
+            v-model="editArticleForm.top6"
+            label="Top 6"
+          ></v-checkbox>
+          
+          <v-checkbox
+            v-model="editArticleForm.main_news"
+            label="Main News"
+          ></v-checkbox>
+        </div>
+
         <v-divider class="my-5"></v-divider>
 
         <EditThumbnailInput
@@ -79,7 +91,9 @@ const editArticleForm = useForm({
   thumbnail: '',
   category_id: null,
   content: '',
-  images: []
+  images: [],
+  top6: false,
+  main_news: false,
 })
 
 watch(
@@ -91,6 +105,8 @@ watch(
       editArticleForm.category_id = newArticle.category_id;
       editArticleForm.content = newArticle.content;
       // editArticleForm.images = newArticle.images;
+      editArticleForm.top6 = newArticle.top6;
+      editArticleForm.main_news = newArticle.main_news;
     }
   },
   { immediate: true }

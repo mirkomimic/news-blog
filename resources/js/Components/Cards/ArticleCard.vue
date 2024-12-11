@@ -5,10 +5,11 @@
     class="w-100 h-100"
   >
     <v-img
-      class="align-end text-white"
+      class="align-end text-white mx-auto"
       :src="`storage/images/articles/${article.id}/${article.thumbnail}`"
       cover
-      :class="{'ImgSize': props.index == 0}"
+      :class="{'ImgSize': article.main_news, 'smallImg': !article.main_news}"
+      :cover="true"
     >
       <!-- <v-card-title>Top 10 Australian beaches</v-card-title> -->
     </v-img>
@@ -31,7 +32,13 @@ const props = defineProps(['article', 'index'])
 
 <style scoped>
 .ImgSize {
-  width: 600px;
+  width: auto;
   height: 400px;
+}
+
+.smallImg {
+  width: 286px;
+  height: 176px;
+
 }
 </style>

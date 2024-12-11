@@ -42,7 +42,17 @@ class ArticlesCrudService
 
   public function read()
   {
-    $articles = Article::with(['images', 'category'])->get();
+    $top6Articles = Article::where('top6', true)
+      ->orderBy('created_at', 'desc')
+      ->take(5)
+      ->get();
+
+    $mainNewsArticle = Article::where('main_news', true)
+      ->orderBy('created_at', 'desc')
+      ->first();
+
+    $articles = $mainNewsArticle ? collect([$mainNewsArticle])->concat($top6Articles) : $top6Articles;
+
     return $articles;
   }
 
@@ -51,6 +61,8 @@ class ArticlesCrudService
     $article->title = $request->title;
     $article->category_id = $request->category_id;
     $article->content = $request->content;
+    $article->top6 = $request->top6;
+    $article->main_news = $request->main_news;
 
     if ($request->hasFile('images.*.file')) {
       $this->articlesImagesService->saveImages('articles', $article->id, $request->images);

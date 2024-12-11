@@ -22,6 +22,7 @@
     </v-bottom-navigation>
 
     <v-footer style="z-index: 20;" v-if="display.mdAndUp">
+      <div style="height: 300px;"></div>
       <!-- <MainFooter/> -->
     </v-footer>
 
