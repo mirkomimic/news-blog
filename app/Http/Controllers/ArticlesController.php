@@ -24,8 +24,14 @@ class ArticlesController extends Controller
 
   public function show(Article $article)
   {
+    $latestArticles = Article::orderBy('created_at', 'desc')->take(3)->get();
+
+    $moreFromCategory = Article::query()->where('category_id', $article->category->id)->orderBy('created_at', 'desc')->take(3)->get();
+
     return Inertia::render('Articles/Show', [
-      'article' => $article
+      'article' => $article,
+      'latestArticles' => $latestArticles,
+      'moreFromCategory' => $moreFromCategory
     ]);
   }
 }

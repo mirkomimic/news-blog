@@ -81,7 +81,7 @@ onMounted(() => {
     content: props.modelValue,
     editorProps: {
       attributes: {
-        class: 'pa-3',
+        class: '',
       },
     },
   })

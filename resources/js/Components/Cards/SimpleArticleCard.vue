@@ -5,10 +5,9 @@
     class="w-100 h-100"
   >
     <v-img
-      class="align-end text-white mx-auto"
-      :src="`storage/images/articles/${article.id}/${article.thumbnail}`"
+      class="align-end text-white mx-auto smallImg"
+      :src="`/storage/images/articles/${article.id}/${article.thumbnail}`"
       cover
-      :class="{'ImgSize': article.main_news, 'smallImg': !article.main_news}"
     >
       <!-- <v-card-title>Top 10 Australian beaches</v-card-title> -->
     </v-img>
@@ -30,13 +29,8 @@ const props = defineProps(['article', 'index'])
 </script>
 
 <style scoped>
-.ImgSize {
-  width: auto;
-  height: 400px;
-}
-
 .smallImg {
-  width: 286px;
+  width: auto;
   height: 176px;
 
 }
